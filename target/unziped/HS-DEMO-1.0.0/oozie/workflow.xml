@@ -1,0 +1,48 @@
+<workflow-app name="${oozieWorkflowDisplayName}" xmlns="uri:oozie:workflow:0.5">
+    <global>
+        <job-tracker>${oozieJobTracker}</job-tracker>
+        <name-node>${oozieNameNode}</name-node>
+        <configuration>
+            <property>
+                <name>oozie.launcher.mapred.job.queue.name</name>
+                <value>${oozieQueue}</value>
+            </property>
+        </configuration>
+    </global>
+
+    <start to="submit-spark-job"/>
+
+    <action name="submit-spark-job">
+        <spark xmlns="uri:oozie:spark-action:0.2">
+            <master>${sparkMaster}</master>
+            <mode>${sparkMode}</mode>
+            <name>${sparkAppName}</name>
+            <class>${sparkMainClass}</class>
+            <jar>${sparkJarPath}</jar>
+            <spark-opts>--queue ${sqdYarnQueue} --executor-memory ${sparkExecutorMemory} --num-executors ${sparkNumExecutors} --executor-cores ${sparkExecutorCores} --driver-memory ${sparkDriverMemory}</spark-opts>
+            <arg>${date}</arg>
+            <file>${confFile}</file>
+        </spark>
+        <ok to="end"/>
+        <error to="get-spark-log-hdfs"/>
+    </action>
+
+    <action name="get-spark-log-hdfs">
+        <shell xmlns="uri:oozie:shell-action:0.3">
+            <exec>getSparkLogHDFS.sh</exec>
+            <env-var>errorMessage=${wf:errorMessage(wf:lastErrorNode())}</env-var>
+            <env-var>sparkLogFolderOnHdfs=${sparkLogFolderOnHdfs}</env-var>
+            <file>${getLogScriptPath}#getSparkLogHDFS.sh</file>
+            <capture-output/>
+        </shell>
+        <ok to="fail"/>
+        <error to="fail"/>
+    </action>
+    
+    <kill name="fail">
+        <message>
+            Action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]
+        </message>
+    </kill>
+    <end name="end"/>
+</workflow-app>
