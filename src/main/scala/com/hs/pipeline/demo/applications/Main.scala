@@ -12,6 +12,7 @@ object Main {
     val contractDf : DataFrame = loadContractDf(date)
 
     //transformations
+    //T101...
 
     //publish on hive or on hdfs as parquet files
 
