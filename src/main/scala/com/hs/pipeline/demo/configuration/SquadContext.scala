@@ -9,5 +9,8 @@ object SquadContext {
     ConfigFactory.load()
   }
 
-  val clientFilePath: String = squadConf.getString("clientFilePath")
+  val ClientFilePath: String = squadConf.getString("clientFilePath")
+  val SparkMaster = squadConf.getString("sparkMaster")
+  val SparkAppName = squadConf.getString("sparkAppName")
+
 }

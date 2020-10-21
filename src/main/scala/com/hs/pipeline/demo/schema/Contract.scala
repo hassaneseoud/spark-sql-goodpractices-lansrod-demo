@@ -34,7 +34,7 @@ object Contract {
   }
 
   def loadContractDf(date: String)(implicit spark: SparkSession): DataFrame = {
-    val df = loadCsvToDataframe(SquadContext.clientFilePath + "/" + date)
+    val df = loadCsvToDataframe(SquadContext.ClientFilePath + "/" + date)
     selectAndRenameColumns(selectedCols, renameMapping)(df)
   }
 
