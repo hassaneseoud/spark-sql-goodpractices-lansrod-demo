@@ -5,22 +5,22 @@ import com.hs.pipeline.demo.schema.Clients.loadClientDf
 import com.hs.pipeline.demo.schema.Country.loadCountryDf
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.functions.broadcast
-import com.hs.pipeline.demo.configuration.LsContext
+import com.hs.pipeline.demo.configuration.{LsContext, Param}
 import com.hs.pipeline.demo.transformations.ContractTransformation
 
 object Main {
-  def main(args: Array[String]): Unit = {
-    implicit val spark: SparkSession = SparkSession. builder. master(LsContext.SparkMaster) . appName(LsContext.SparkAppName).getOrCreate()
-    spark.sparkContext.setLogLevel("ERROR")
 
+  def main(args: Array[String]): Unit = {
     /**
      * loading the different files names for
      *  the contract.csv (with date)
-     *  the clients for clients.csv
-     *  the country for country.csv
+     *  applications.properties path
      */
     val date = args(0)
+    Param.Path = args(1)
 
+    implicit val spark: SparkSession = SparkSession. builder. master(LsContext.SparkMaster) . appName(LsContext.SparkAppName).getOrCreate()
+    spark.sparkContext.setLogLevel("ERROR")
 
     /**
      * creating the dataframes from reading from hdfs for clients, contracts and country information

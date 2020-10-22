@@ -6,7 +6,8 @@ object LsContext {
 
   val LsConf: Config = {
     ConfigFactory.invalidateCaches()
-    ConfigFactory.load()
+    // this line will change once we will move to cluster mode
+    ConfigFactory.parseFile(new java.io.File(Param.Path +"/conf/application.properties"))
   }
 
   val ContractFilePath: String = LsConf.getString("contractFilePath")

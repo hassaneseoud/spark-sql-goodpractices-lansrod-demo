@@ -25,7 +25,6 @@ object Clients {
 
   /**
    * the below function loads the csv file from hdfs
-   * @param fileName the filename
    * @param spark the sparkSession
    * @return the dataframe read from csv file
    */
