@@ -1,7 +1,8 @@
 package com.hs.pipeline.demo.schema
 
 import com.hs.pipeline.demo.Load.loadCsvToDataframe
-import com.hs.pipeline.demo.configuration.SquadContext
+import com.hs.pipeline.demo.configuration.LsContext
+import org.apache.spark.sql.functions.broadcast
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 /**
@@ -19,7 +20,6 @@ object Clients {
 
   val selectedCols = Seq(
       ClientId,
-      Name,
       DoB
     )
 
@@ -29,5 +29,11 @@ object Clients {
    * @param spark the sparkSession
    * @return the dataframe read from csv file
    */
-  def loadClientDf(fileName: String)(implicit spark: SparkSession): DataFrame = loadCsvToDataframe(SquadContext.ClientFilePath + "/" + fileName)
+  def loadClientDf(implicit spark: SparkSession): DataFrame =
+    loadCsvToDataframe(LsContext.ClientFilePath)
+      .select(selectedCols.head, selectedCols.tail: _*)
+
+  def joinWithClient(clientDf: DataFrame)(contractDf: DataFrame): DataFrame =
+    contractDf.join(broadcast(clientDf), Seq(ClientId),"leftouter" )
+
 }
