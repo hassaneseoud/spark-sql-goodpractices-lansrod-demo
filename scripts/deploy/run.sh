@@ -9,7 +9,7 @@ blue=`tput setaf 4`
 # deleting files
 echo "${red}DELETING EXISTING FILES ............................"
 tput setaf 7
-hdfs dfs -rm -r  /user/achref/finalData
+hdfs dfs -rm -r  /user/achref/result/finalData
 hdfs dfs -rm  /user/achref/HS-DEMO-1.0.0-spark.jar
 
 # packaging the jar file
@@ -26,5 +26,5 @@ hdfs dfs -put file:///home/lansrod/Bureau/formation/spark-sql-goodpractices-lans
 # running the app
 echo "${blue}RUNNING SPARK JOB....................................."
 tput setaf 7
-/usr/hdp/current/spark2-client/bin/spark-submit --class com.hs.pipeline.demo.applications.Main  hdfs://achref:8020/user/achref/HS-DEMO-1.0.0-spark.jar 20102020.csv clients.csv country.csv
+/usr/hdp/current/spark2-client/bin/spark-submit --class com.hs.pipeline.demo.applications.Main  hdfs://achref:8020/user/achref/HS-DEMO-1.0.0-spark.jar 20102020
 

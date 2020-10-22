@@ -39,7 +39,7 @@ object Main {
     /**
      * writing the resulting joinedDf dataFrame in hdfs in parquet format
      */
-    bv.write.mode("overwrite").parquet(LsContext.ClientFilePath + "finalData")
+    bv.write.mode("overwrite").parquet(LsContext.ResultFilePath + "finalData")
 
     spark.stop()
   }
