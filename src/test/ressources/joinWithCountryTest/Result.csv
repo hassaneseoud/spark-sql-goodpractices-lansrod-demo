@@ -1,5 +1,5 @@
-id;country_code;name
-1;FR;France
-2;TN;Tunisie
-3;ZZ;
-4;;
+country_code;id;name
+FR;1;France
+TN;2;Tunisie
+ZZ;3;
+;4;
