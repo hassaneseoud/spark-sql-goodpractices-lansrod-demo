@@ -4,7 +4,7 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
 
 object Load {
 
-  val CsvDefaultDelimiter = ","
+  val CsvDefaultDelimiter = ";"
 
   def loadCsvToDataframe(path: String)(implicit spark: SparkSession): DataFrame = {
     spark.read.option("header", "true").option("delimiter", CsvDefaultDelimiter).csv(path)
