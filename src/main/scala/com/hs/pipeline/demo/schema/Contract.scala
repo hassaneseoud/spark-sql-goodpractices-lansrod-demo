@@ -1,7 +1,7 @@
 package com.hs.pipeline.demo.schema
 
 import com.hs.pipeline.demo.Load._
-import com.hs.pipeline.demo.configuration.SquadContext
+import com.hs.pipeline.demo.configuration.LsContext
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 object Contract {
@@ -34,7 +34,7 @@ object Contract {
   }
 
   def loadContractDf(date: String)(implicit spark: SparkSession): DataFrame = {
-    val df = loadCsvToDataframe(SquadContext.clientFilePath + "/" + date)
+    val df = loadCsvToDataframe(LsContext.ContractFilePath + "/" + date)
     selectAndRenameColumns(selectedCols, renameMapping)(df)
   }
 
