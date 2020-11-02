@@ -3,7 +3,9 @@ package com.hs.pipeline.demo.test.transformations
 import com.hs.pipeline.demo.test.LsTestingBase
 import com.hs.pipeline.demo.schema.Country.joinWithCountry
 import com.hs.pipeline.demo.schema.Clients.joinWithClient
-import com.hs.pipeline.demo.transformations.ContractTransformation.createBv
+import com.hs.pipeline.demo.transformations.ContractTransformation.{calParticipation, createBv}
+import org.apache.spark.sql.functions.col
+import org.apache.spark.sql.types.DoubleType
 
 class ContractJoinsTests extends LsTestingBase{
 
@@ -49,6 +51,16 @@ class ContractJoinsTests extends LsTestingBase{
 
     // def assertDataFrameEquals(expected : org.apache.spark.sql.DataFrame, result : org.apache.spark.sql.DataFrame)
     assertDataFrameEquals(resultDf, createBvResultDf)
+  }
+
+  test ("calculateParticipationTest") {
+    val contractDf = loadTestResourcesCSV("/calculateParticipation/Contract.csv")
+    val resultDf = loadTestResourcesCSV("/calculateParticipation/Result.csv")
+      .withColumn("participation",col("participation").cast(DoubleType))
+
+    val participationDf = calParticipation(contractDf)
+    participationDf.collect().foreach(println)
+    assertDataFrameEquals(resultDf,participationDf)
   }
 
 }

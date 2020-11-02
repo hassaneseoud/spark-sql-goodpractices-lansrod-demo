@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Tue Oct 27 10:45:49 CET 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0175-6973-0cc1-00000c440618 
-on database directory /tmp/spark-a8b39d45-2c2f-4923-88a9-e46e8ba63900/metastore with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@a0f53fc 
-Loaded from file:/home/lansrod/.m2/repository/org/apache/derby/derby/10.10.2.0/derby-10.10.2.0.jar
+Mon Nov 02 15:30:29 UTC 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0175-8994-c406-00000dd03558 
+on database directory C:\Users\hamro\AppData\Local\Temp\spark-6c5ed16c-2458-4da2-bdab-0c37627041e8\metastore with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@6c15e8c7 
+Loaded from file:/C:/Users/hamro/.m2/repository/org/apache/derby/derby/10.10.2.0/derby-10.10.2.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_231-b11
-user.dir=/home/lansrod/Bureau/formation/spark-sql-goodpractices-lansrod-demo
-os.name=Linux
+user.dir=C:\Users\hamro\Desktop\project2nvbre2020\spark-sql-goodpractices-lansrod-demo
+os.name=Windows 10
 os.arch=amd64
-os.version=4.15.0-122-generic
+os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
