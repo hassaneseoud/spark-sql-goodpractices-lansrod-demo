@@ -30,7 +30,7 @@ object Country {
     loadCsvToDataframe(LsContext.CountryFilePath)
     .select(selectedCols.head, selectedCols.tail: _*)
 
-  def joinWithCountry(countryDf: DataFrame)(contractDf: DataFrame): DataFrame =
-    contractDf.join(broadcast(countryDf),Seq(CountryCode),"leftouter")
+  def joinWithCountry(countryDf: DataFrame): DataFrame => DataFrame =
+    df => df.join(broadcast(countryDf),Seq(CountryCode),"leftouter")
 
 }

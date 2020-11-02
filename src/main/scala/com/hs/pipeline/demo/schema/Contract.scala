@@ -2,6 +2,8 @@ package com.hs.pipeline.demo.schema
 
 import com.hs.pipeline.demo.Load._
 import com.hs.pipeline.demo.configuration.LsContext
+import org.apache.spark.sql.functions.col
+import org.apache.spark.sql.types.{DoubleType, IntegerType}
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 object Contract {
@@ -35,6 +37,7 @@ object Contract {
 
   def loadContractDf(date: String)(implicit spark: SparkSession): DataFrame = {
     val df = loadCsvToDataframe(LsContext.ContractFilePath + "/" + date)
+      .withColumn(Amount, col(Amount).cast(DoubleType))
     selectAndRenameColumns(selectedCols, renameMapping)(df)
   }
 
