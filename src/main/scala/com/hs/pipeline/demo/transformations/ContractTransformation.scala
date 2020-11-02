@@ -1,6 +1,6 @@
 package com.hs.pipeline.demo.transformations
 
-import com.hs.pipeline.demo.schema.{Clients, Country}
+import com.hs.pipeline.demo.schema.{Clients, Contract, Country}
 import org.apache.spark.sql.DataFrame
 
 object ContractTransformation {
@@ -13,5 +13,5 @@ object ContractTransformation {
 
     contractWithCountryCols
   }
-
+def calculateParticipation (contractDf: DataFrame): DataFrame = Contract.calculateParticipation (contractDf)
 }

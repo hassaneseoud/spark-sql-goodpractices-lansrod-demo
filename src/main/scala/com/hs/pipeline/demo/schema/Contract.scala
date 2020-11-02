@@ -2,8 +2,9 @@ package com.hs.pipeline.demo.schema
 
 import com.hs.pipeline.demo.Load._
 import com.hs.pipeline.demo.configuration.LsContext
+import org.apache.spark.sql.functions.sum
 import org.apache.spark.sql.{DataFrame, SparkSession}
-
+import org.apache.spark.sql.functions._
 object Contract {
 
   val Id = "id"
@@ -14,6 +15,7 @@ object Contract {
   val Entity = "entity_id"
   val OrderTime = "time"
   val BrokerId = "broker"
+  val participation = "participation"
 
   val selectedCols = Seq(
       Id,
@@ -22,7 +24,8 @@ object Contract {
       Amount,
       Country,
       Entity,
-      OrderTime
+      OrderTime,
+    participation
   )
 
   //renamed cols
@@ -38,5 +41,8 @@ object Contract {
     selectAndRenameColumns(selectedCols, renameMapping)(df)
   }
 
+  def gitcalculateParticipation (contractDf: DataFrame): DataFrame = {
 
-}
+     contractDf.groupBy("Entity").(Amount.divide (sum("Amount"))).as("participation")
+
+  }}
