@@ -32,7 +32,7 @@ object Clients {
     loadCsvToDataframe(LsContext.ClientFilePath)
       .select(selectedCols.head, selectedCols.tail: _*)
 
-  def joinWithClient(clientDf: DataFrame)(contractDf: DataFrame): DataFrame =
-    contractDf.join(broadcast(clientDf), Seq(ClientId),"leftouter" )
+  def joinWithClient(clientDf: DataFrame): DataFrame => DataFrame = df =>
+    df.join(broadcast(clientDf), Seq(ClientId),"leftouter" )
 
 }
