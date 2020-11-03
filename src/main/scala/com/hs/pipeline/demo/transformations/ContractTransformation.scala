@@ -13,5 +13,8 @@ object ContractTransformation {
 
     contractWithCountryCols
   }
-def calculateParticipation (contractDf: DataFrame): DataFrame = Contract.calculateParticipation (contractDf)
+
+
+
+def calculateParticipation (contractDf: DataFrame ): DataFrame = Contract.calculateParticipation (contractDf)
 }
