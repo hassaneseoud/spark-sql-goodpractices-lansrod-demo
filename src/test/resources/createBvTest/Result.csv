@@ -1,5 +1,7 @@
-country_code;client_id;DOB;name
-FR;1;12/09/1988;France
-TN;2;13/10/2020;Tunisie
-ZZ;3;12/10/1991;
-;4;;
+country_code;client_id;id;entity_id;amount;DOB;name;participation
+FR;1;001;01;1000;12/09/1988;France;0.3333333333333333
+TN;2;002;01;2000;13/10/2020;Tunisie;0.6666666666666666
+ZZ;3;003;02;1000;12/10/1991;;0.25
+;4;004;02;1000;;;0.25
+;;005;02;2000;;;0.5
+;;006;03;100;;;1.0
