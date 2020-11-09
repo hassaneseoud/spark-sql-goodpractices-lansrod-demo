@@ -14,9 +14,8 @@ object ContractTransformation {
     val transformations: List[DataFrame => DataFrame] = List(
       Clients.joinWithClient(clientDf),
       Country.joinWithCountry(countryDf),
-      calculateParticipation
-      //I commented the selection because we haven't contract_type and time columns
-    // selectBvColumns
+      calculateParticipation,
+      selectBvColumns
     )
 
       transformations.foldLeft(contractDf){

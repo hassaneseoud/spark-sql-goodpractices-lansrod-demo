@@ -63,11 +63,12 @@ class ContractJoinsTests extends LsTestingBase{
   test("ContractCreateBvTest"){
 
     val resultSchema = StructType(Array(
-      StructField(Contract.Country, StringType, true),
-      StructField(Contract.ClientId, StringType, true),
       StructField(Contract.Id, StringType, true),
-      StructField(Contract.Entity, StringType, true),
+      StructField(Contract.ClientId, StringType, true),
+      StructField(Contract.ContratType, StringType, true),
       StructField(Contract.Amount, DoubleType, true),
+      StructField(Contract.Entity, StringType, true),
+      StructField(Contract.OrderTime, StringType, true),
       StructField(Clients.DoB, StringType, true),
       StructField(Country.Name, StringType, true),
       StructField(BusinessView.Participation, DoubleType, true)
@@ -81,7 +82,9 @@ class ContractJoinsTests extends LsTestingBase{
       StructField(Contract.ClientId, StringType, true),
       StructField(Contract.Country, StringType, true),
       StructField(Contract.Entity, StringType, true),
-      StructField(Contract.Amount, DoubleType, true)
+      StructField(Contract.Amount, DoubleType, true),
+      StructField(Contract.ContratType, StringType, true),
+      StructField(Contract.OrderTime, StringType, true)
     ))
 
 
@@ -105,7 +108,7 @@ class ContractJoinsTests extends LsTestingBase{
     // output of the createBv
 
     val createBvResultDf =createBv(clientDf, countryDf)(contractDf).orderBy(Contract.Id)
-    createBvResultDf.show()
+
     // def assertDataFrameEquals(expected : org.apache.spark.sql.DataFrame, result : org.apache.spark.sql.DataFrame)
     assertDataFrameEquals(resultDf, createBvResultDf)
   }
