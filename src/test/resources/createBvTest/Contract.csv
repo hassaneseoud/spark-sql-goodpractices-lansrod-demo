@@ -1,5 +1,7 @@
-client_id;country_code
-1;FR
-2;TN
-3;ZZ
-4;
+id;client_id;country_code;entity_id;amount;contract_type;time
+001;1;FR;01;1000;;
+002;2;TN;01;2000;;
+003;3;ZZ;02;1000;;
+004;4;;02;1000;;
+005;;;02;2000;;
+006;;;03;100;;

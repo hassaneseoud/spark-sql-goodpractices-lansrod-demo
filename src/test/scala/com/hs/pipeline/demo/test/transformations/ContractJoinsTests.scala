@@ -3,9 +3,11 @@ package com.hs.pipeline.demo.test.transformations
 import com.hs.pipeline.demo.test.LsTestingBase
 import com.hs.pipeline.demo.schema.Country.joinWithCountry
 import com.hs.pipeline.demo.schema.Clients.joinWithClient
-import com.hs.pipeline.demo.schema.{BusinessView, Contract}
+import com.hs.pipeline.demo.schema.{BusinessView, Clients, Contract, Country}
 import com.hs.pipeline.demo.transformations.ContractTransformation
-import org.apache.spark.sql.types._
+import com.hs.pipeline.demo.transformations.ContractTransformation.createBv
+import org.apache.spark.sql.DataFrame
+import org.apache.spark.sql.types.{StructField, _}
 
 class ContractJoinsTests extends LsTestingBase{
 
@@ -56,21 +58,59 @@ class ContractJoinsTests extends LsTestingBase{
 
 
  }
-  /**
+
 
   test("ContractCreateBvTest"){
 
+    val resultSchema = StructType(Array(
+      StructField(Contract.Id, StringType, true),
+      StructField(Contract.ClientId, StringType, true),
+      StructField(Contract.ContratType, StringType, true),
+      StructField(Contract.Amount, DoubleType, true),
+      StructField(Contract.Entity, StringType, true),
+      StructField(Contract.OrderTime, StringType, true),
+      StructField(Clients.DoB, StringType, true),
+      StructField(Country.Name, StringType, true),
+      StructField(BusinessView.Participation, DoubleType, true)
+
+
+    ))
+
+
+    val contractSchema = StructType(Array(
+      StructField(Contract.Id, StringType, true),
+      StructField(Contract.ClientId, StringType, true),
+      StructField(Contract.Country, StringType, true),
+      StructField(Contract.Entity, StringType, true),
+      StructField(Contract.Amount, DoubleType, true),
+      StructField(Contract.ContratType, StringType, true),
+      StructField(Contract.OrderTime, StringType, true)
+    ))
+
+
+    val clientSchema = StructType(Array(
+      StructField(Clients.ClientId, StringType, true),
+      StructField(Clients.DoB, StringType, true)
+
+    ))
+
+    val countrySchema = StructType(Array(
+      StructField(Country.CountryCode, StringType, true),
+      StructField(Country.Name, StringType, true)
+
+    ))
     // loading from test/resources
-    val clientDf = loadTestResourcesCSV("/createBvTest/Client.csv")
-    val contractDf = loadTestResourcesCSV("/createBvTest/Contract.csv")
-    val countryDf = loadTestResourcesCSV("/createBvTest/Country.csv")
-    val resultDf = loadTestResourcesCSV("/createBvTest/Result.csv")
+    val clientDf = loadTestResourcesCSV("/createBvTest/Client.csv",clientSchema)
+    val contractDf = loadTestResourcesCSV("/createBvTest/Contract.csv",contractSchema)
+    val countryDf = loadTestResourcesCSV("/createBvTest/Country.csv",countrySchema)
+    val resultDf = loadTestResourcesCSV("/createBvTest/Result.csv",resultSchema).orderBy(Contract.Id)
 
     // output of the createBv
-    val createBvResultDf = createBv(clientDf, countryDf)(contractDf)
+
+    val createBvResultDf =createBv(clientDf, countryDf)(contractDf).orderBy(Contract.Id)
 
     // def assertDataFrameEquals(expected : org.apache.spark.sql.DataFrame, result : org.apache.spark.sql.DataFrame)
     assertDataFrameEquals(resultDf, createBvResultDf)
-  }**/
+  }
 
 }

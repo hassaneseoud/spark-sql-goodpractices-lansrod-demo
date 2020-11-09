@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Mon Nov 09 16:44:38 CET 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0175-adae-3a9a-000008c135e0 
+on database directory /tmp/spark-6363e0fe-6206-4d7d-aa80-f31ec2ec86ab/metastore with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@a0db585 
+Loaded from file:/home/lansrod/.m2/repository/org/apache/derby/derby/10.10.2.0/derby-10.10.2.0.jar
+java.vendor=Private Build
+java.runtime.version=1.8.0_272-8u272-b10-0ubuntu1~16.04-b10
+user.dir=/home/lansrod/Documents/spark/spark-sql-goodpractices-lansrod-demo
+os.name=Linux
+os.arch=amd64
+os.version=4.15.0-122-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
